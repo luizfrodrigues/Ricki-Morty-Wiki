@@ -11,14 +11,18 @@ import Search from './components/Search/Search';
 function App() {
   let [pageNumber, setPageNumber] = useState(1);
   let [search, setSearch] = useState('');
+  let [status, setStatus] = useState('');
+  let [gender, setGender] = useState('');
+  let [species, setSpecies] = useState('');
+
   let [fetchedData, updateFetchedData] = useState([]);
   let { info, results } = fetchedData;
 
-  console.log(results);
-  console.log(info);
+  // console.log(results);
+  // console.log(info);
 
   const url = 'https://rickandmortyapi.com/api/character/';
-  let api = `${url}?page=${pageNumber}&name=${search}`;
+  let api = `${url}?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
 
   useEffect(() => {
     (async function () {
@@ -37,7 +41,12 @@ function App() {
 
       <div className='container'>
         <div className='row'>
-          <Filters />
+          <Filters
+            setStatus={setStatus}
+            setSpecies={setSpecies}
+            setGender={setGender}
+            setPageNumber={setPageNumber}
+          />
           <div className='col-8'>
             <div className='row'>
               <Cards results={results} />
